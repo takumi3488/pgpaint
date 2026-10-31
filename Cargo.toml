@@ -29,7 +29,7 @@ name = "pgpaint"
 path = "src/main.rs"
 
 [dependencies]
-aes-gcm = "0.10"
+aes-gcm = "0.11"
 async-stream = "0.3"
 async-trait = "0.1"
 aurora-dsql-sqlx-connector = { version = "0.2.2", features = ["pool"] }
