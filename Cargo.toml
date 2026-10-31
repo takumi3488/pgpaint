@@ -86,3 +86,6 @@ dbg_macro = "deny"
 expect_used = "deny"
 pedantic = { level = "warn", priority = -1 }
 unwrap_used = "deny"
+
+[patch.crates-io]
+testcontainers-modules = { git = "https://github.com/testcontainers/testcontainers-rs-modules-community", rev = "d69e3a09397532accea9d9e907fecc280b1513a8" }

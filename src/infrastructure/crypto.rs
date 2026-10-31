@@ -43,7 +43,7 @@ impl SecretCipher for AesGcmSecretCipher {
         getrandom::fill(&mut nonce).map_err(|_| SecretCipherError::EncryptionFailed)?;
         let ciphertext = cipher
             .encrypt(
-                Nonce::from_slice(&nonce),
+                &Nonce::from(nonce),
                 Payload {
                     msg: secret.expose().as_bytes(),
                     aad: FORMAT_VERSION.as_bytes(),
@@ -75,11 +75,12 @@ impl SecretCipher for AesGcmSecretCipher {
             return Err(SecretCipherError::InvalidEncoding);
         }
         let (nonce, ciphertext) = bytes.split_at(NONCE_LEN);
+        let nonce = Nonce::try_from(nonce).map_err(|_| SecretCipherError::InvalidEncoding)?;
         let cipher =
             Aes256Gcm::new_from_slice(key).map_err(|_| SecretCipherError::AuthenticationFailed)?;
         let plaintext = cipher
             .decrypt(
-                Nonce::from_slice(nonce),
+                &nonce,
                 Payload {
                     msg: ciphertext,
                     aad: FORMAT_VERSION.as_bytes(),

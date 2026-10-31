@@ -12,7 +12,7 @@ aws-sdk-dsql = "1"
 bollard = "0.21"
 rcgen = "0.14"
 reqwest = { version = "0.13", default-features = false, features = [
-  "rustls-tls",
+  "rustls",
 ] }
 sqlx = { version = "0.9", default-features = false, features = [
   "postgres",
