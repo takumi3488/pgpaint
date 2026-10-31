@@ -1,0 +1,5 @@
+- name: Set up Bun
+  uses: oven-sh/setup-bun@v2
+- name: Build web assets
+  shell: bash
+  run: cd web && bun install --frozen-lockfile && bun run build

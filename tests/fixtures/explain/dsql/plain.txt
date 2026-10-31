@@ -1,0 +1,13 @@
+Sort  (cost=158.59..162.34 rows=1500 width=48)
+  Output: c.id, o.id, c.full_name
+  Sort Key: c.full_name, o.id
+  ->  Hash Join  (cost=39.50..79.46 rows=1500 width=48)
+        Output: c.id, o.id, c.full_name
+        Inner Unique: true
+        Hash Cond: (o.customer_id = c.id)
+        ->  Seq Scan on public.orders o  (cost=0.00..36.00 rows=1500 width=16)
+              Output: o.id, o.customer_id, o.status, o.ordered_at, o.total, o.details
+        ->  Hash  (cost=27.00..27.00 rows=1000 width=40)
+              Output: c.id, c.full_name
+              ->  Seq Scan on public.customers c  (cost=0.00..27.00 rows=1000 width=40)
+                    Output: c.id, c.full_name

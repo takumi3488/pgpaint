@@ -1,0 +1,5 @@
+/target
+.env
+*.log
+/web/node_modules/
+/public/assets/

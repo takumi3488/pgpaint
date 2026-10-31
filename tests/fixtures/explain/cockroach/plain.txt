@@ -1,0 +1,19 @@
+distribution: local
+vectorized: true
+
+• sort
+│ order: +full_name,+id
+│
+└── • merge join
+    │ equality: (id) = (customer_id)
+    │ left cols are key
+    │
+    ├── • scan
+    │     missing stats
+    │     table: customers@customers_pkey
+    │     spans: FULL SCAN
+    │
+    └── • scan
+          missing stats
+          table: orders@orders_customer_ordered_idx
+          spans: FULL SCAN

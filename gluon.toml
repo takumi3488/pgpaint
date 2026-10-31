@@ -1,0 +1,19 @@
+[app]
+name = "pgpaint"
+
+[server]
+host = "0.0.0.0"
+port = 3000
+
+[database]
+url_env = "DATABASE_URL"
+pool_size = 10
+
+[view]
+pretty = false
+tailwind = true
+tailwind_content = ["web/src/**/*.ts"]
+
+[telemetry]
+enabled_env = "OTEL_ENABLED"
+service_name = "pgpaint"

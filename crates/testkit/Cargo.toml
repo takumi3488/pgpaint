@@ -1,0 +1,36 @@
+[package]
+edition = "2024"
+name = "pgpaint-testkit"
+publish = false
+version = "0.1.0"
+
+[dependencies]
+anyhow = "1"
+aws-config = "1"
+aws-credential-types = "1"
+aws-sdk-dsql = "1"
+bollard = "0.20"
+rcgen = "0.13"
+reqwest = { version = "0.12", default-features = false, features = [
+  "rustls-tls",
+] }
+sqlx = { version = "0.9", default-features = false, features = [
+  "postgres",
+  "runtime-tokio",
+  "tls-rustls-ring-native-roots",
+  "uuid",
+] }
+testcontainers-modules = { version = "0.15", features = [
+  "cockroach_db",
+  "http_wait",
+  "postgres",
+] }
+tokio = { version = "1", features = [
+  "io-util",
+  "macros",
+  "net",
+  "rt-multi-thread",
+  "signal",
+  "time",
+] }
+uuid = { version = "1", features = ["v4"] }

@@ -1,0 +1,59 @@
+planning time: 397µs
+execution time: 2ms
+distribution: local
+vectorized: true
+plan type: custom
+rows decoded from KV: 2,500 (175 KiB, 2 gRPC calls)
+cumulative time spent in KV: 1ms
+maximum memory usage: 540 KiB
+DistSQL network usage: 0 B (0 messages)
+sql cpu time: 539µs
+isolation level: serializable
+priority: normal
+quality of service: regular
+
+• sort
+│ sql nodes: n1
+│ actual row count: 1,500
+│ execution time: 200µs
+│ estimated max memory allocated: 174 KiB
+│ sql cpu time: 200µs
+│ order: +full_name,+id
+│
+└── • merge join
+    │ sql nodes: n1
+    │ actual row count: 1,500
+    │ execution time: 156µs
+    │ estimated max memory allocated: 330 KiB
+    │ estimated max sql temp disk usage: 0 B
+    │ sql cpu time: 156µs
+    │ equality: (id) = (customer_id)
+    │ left cols are key
+    │
+    ├── • scan
+    │     sql nodes: n1
+    │     kv nodes: n1
+    │     actual row count: 1,000
+    │     KV time: 584µs
+    │     KV rows decoded: 1,000
+    │     KV bytes read: 116 KiB
+    │     KV gRPC calls: 1
+    │     estimated max memory allocated: 150 KiB
+    │     sql cpu time: 81µs
+    │     missing stats
+    │     table: customers@customers_pkey
+    │     spans: FULL SCAN
+    │
+    └── • scan
+          sql nodes: n1
+          kv nodes: n1
+          actual row count: 1,500
+          KV time: 465µs
+          KV rows decoded: 1,500
+          KV bytes read: 59 KiB
+          KV gRPC calls: 1
+          estimated max memory allocated: 90 KiB
+          sql cpu time: 103µs
+          missing stats
+          table: orders@orders_customer_ordered_idx
+          spans: FULL SCAN
