@@ -12,7 +12,7 @@ use aws_sdk_dsql::{
 use bollard::{
     Docker, errors::Error as BollardError, query_parameters::RemoveContainerOptionsBuilder,
 };
-use rcgen::{BasicConstraints, CertificateParams, ExtendedKeyUsagePurpose, IsCa, KeyPair};
+use rcgen::{BasicConstraints, CertificateParams, ExtendedKeyUsagePurpose, IsCa, Issuer, KeyPair};
 use sqlx::{
     AssertSqlSafe, Connection, PgConnection, PgPool, Row,
     postgres::{PgConnectOptions, PgPoolOptions, PgSslMode},
@@ -513,13 +513,14 @@ fn generate_test_certificate(host: &str) -> Result<(String, String, String)> {
     let mut ca_params = CertificateParams::default();
     ca_params.is_ca = IsCa::Ca(BasicConstraints::Unconstrained);
     let ca_certificate = ca_params.self_signed(&ca_key)?;
+    let ca_issuer = Issuer::from_params(&ca_params, &ca_key);
 
     let mut server_params = CertificateParams::new(vec![host.to_owned()])?;
     server_params
         .extended_key_usages
         .push(ExtendedKeyUsagePurpose::ServerAuth);
     let server_key = KeyPair::generate()?;
-    let server_certificate = server_params.signed_by(&server_key, &ca_certificate, &ca_key)?;
+    let server_certificate = server_params.signed_by(&server_key, &ca_issuer)?;
     Ok((
         ca_certificate.pem(),
         server_certificate.pem(),

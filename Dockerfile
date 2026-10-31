@@ -1,4 +1,4 @@
-FROM oven/bun:1 AS web-builder
+FROM oven/bun:1@sha256:1d22548f177f4ff38e0c15baa3c2c46c6c2060ba2d1bc573bb4720b407548f1d AS web-builder
 
 WORKDIR /app/web
 
@@ -11,7 +11,7 @@ COPY web/ ./
 RUN bun run build
 
 # Chef stage: cargo-chef is preinstalled
-FROM lukemathwalker/cargo-chef:latest-rust-1.99-alpine AS chef
+FROM lukemathwalker/cargo-chef:latest-rust-1.99-alpine@sha256:2c27e67049f17e8b67d882a2cf2f5e1a1d4d71c206ec97f91edf278254688e95 AS chef
 
 WORKDIR /app
 
@@ -48,7 +48,7 @@ RUN --mount=type=cache,target=/usr/local/cargo/registry,sharing=locked \
     cp /app/target/release/pgpaint /tmp/pgpaint
 
 # Runtime stage: Create minimal production image with static binary
-FROM gcr.io/distroless/static-debian13:nonroot@sha256:f7f8f729987ad0fdf6b05eeeae94b26e6a0f613bdf46feea7fc40f7bd72953e6
+FROM gcr.io/distroless/static-debian13:nonroot@sha256:18f4cc26c9ffa7f20a359298be7deadac5c607c8e03a02b8119f1a5fc2f82c99
 
 WORKDIR /app
 
