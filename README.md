@@ -156,3 +156,5 @@ cargo run -p pgpaint-testkit --example devstack
 
 The devstack prints connection details and runs until Ctrl-C. Its DSQL emulator is `floci/floci:nightly-10292026`: Floci 2.3.0 rejects the DSQL `CreateCluster` service scope, so the testkit pins a nightly until stable support is released. Floci also needs access to the Docker socket mounted inside its container. First-run image pulls are large; YugabyteDB and DSQL can take several minutes to become ready.
 
+Release build setup steps live in `.github/build-setup.yml` and are referenced relative to `.github/workflows` via `workspace.metadata.dist.github-build-setup`; keeping the fragment outside `.github/workflows` prevents GitHub from parsing it as a standalone workflow.
+
