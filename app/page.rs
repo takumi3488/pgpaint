@@ -56,7 +56,7 @@ pub async fn get(
                             .all(u8::is_ascii_hexdigit)
                 })
                 .map_or_else(
-                    || "background-color: #0ea5e9".to_owned(),
+                    || "background-color: #c2410c".to_owned(),
                     |value| format!("background-color: {value}"),
                 );
             ConnectionCard {

@@ -93,7 +93,7 @@ impl ConnectionProfileValues {
             String::new(),
             false,
             String::new(),
-            "#0ea5e9".to_owned(),
+            "#c2410c".to_owned(),
             false,
             String::new(),
             false,
@@ -160,7 +160,7 @@ impl ConnectionProfileValues {
             profile
                 .color
                 .clone()
-                .unwrap_or_else(|| "#0ea5e9".to_owned()),
+                .unwrap_or_else(|| "#c2410c".to_owned()),
             profile.color.is_none(),
             iam_region,
             iam_admin,
