@@ -4,15 +4,15 @@ import CsrfToken from "../../../components/csrf_token.tsx";
 export default function EditConnectionPage(props) {
   return (
     <main class="mx-auto max-w-4xl px-5 py-10">
-      <a href="/" class="text-sm font-medium text-sky-700 hover:underline dark:text-sky-300">← Back to connections</a>
+      <a href="/" class="text-sm font-medium text-orange-700 hover:underline dark:text-orange-300">← Back to connections</a>
       <h1 class="mt-4 text-3xl font-semibold tracking-tight">Edit connection</h1>
-      <p class="mt-2 text-slate-600 dark:text-slate-400">Update the profile settings and test the connection before saving.</p>
+      <p class="mt-2 text-stone-600 dark:text-stone-400">Update the profile settings and test the connection before saving.</p>
       <div class="mt-8">
         <ConnectionForm action={props.action} csrf_token={props.csrf_token} is_edit={props.is_edit} has_secret_cipher={props.has_secret_cipher} values={props.values} errors={props.errors} />
       </div>
-      <section class="mt-12 border-t border-slate-200 pt-8 dark:border-slate-800">
+      <section class="mt-12 border-t border-stone-200 pt-8 dark:border-stone-800">
         <h2 class="text-lg font-semibold">Delete connection</h2>
-        <p class="mt-1 text-sm text-slate-600 dark:text-slate-400">Deleting a profile also closes its active workspace connection.</p>
+        <p class="mt-1 text-sm text-stone-600 dark:text-stone-400">Deleting a profile also closes its active workspace connection.</p>
         <form method="post" action={props.action} data-confirm="Delete this connection profile?" class="mt-4">
           <CsrfToken token={props.csrf_token} />
           <input type="hidden" name="_action" value="delete" />

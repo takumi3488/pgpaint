@@ -140,6 +140,8 @@ bun run watch
 
 In another terminal, run the app with `GLUON_DEV_TEMPLATES=1` so it reads the latest TSX and public assets from disk. The default compiled runtime uses embedded files.
 
+Branding uses orange accents and stone neutrals in both color schemes. The original artwork is `public/images/pgpaint-icon.png`; `public/favicon.png` is its 64x64 browser icon, linked by `app/layout.tsx`. Keep the explicit ER diagram palette in `web/src/islands/er-diagram.ts` aligned with the Tailwind colors in `app/`.
+
 The Testcontainers-based test suite requires a reachable Docker daemon:
 
 ```sh
