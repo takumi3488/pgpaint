@@ -1,9 +1,11 @@
 {
   extends: [
-    "config:best-practices"
+    'config:best-practices',
   ],
-  dependencyDashboard: false,
-  minimumReleaseAge: "3 days",
+  dependencyDashboard: {
+    enabled: false,
+  },
+  minimumReleaseAge: '3 days',
   lockFileMaintenance: {
     minimumReleaseAge: null,
   },
@@ -12,74 +14,85 @@
   },
   customManagers: [
     {
-      customType: "regex",
-      managerFilePatterns: ["/^crates\\/testkit\\/src\\/lib\\.rs$/"],
-      matchStrings: ['const POSTGRES_TAG: &str = "(?<currentValue>[^"]+)";'],
-      datasourceTemplate: "docker",
-      packageNameTemplate: "library/postgres",
-      versioningTemplate: "docker",
+      customType: 'regex',
+      managerFilePatterns: [
+        '/^crates\\/testkit\\/src\\/lib\\.rs$/',
+      ],
+      matchStrings: [
+        'const POSTGRES_TAG: &str = "(?<currentValue>[^"]+)";',
+      ],
+      datasourceTemplate: 'docker',
+      packageNameTemplate: 'library/postgres',
+      versioningTemplate: 'docker',
     },
     {
-      customType: "regex",
-      managerFilePatterns: ["/^crates\\/testkit\\/src\\/lib\\.rs$/"],
-      matchStrings: ['const COCKROACH_TAG: &str = "(?<currentValue>[^"]+)";'],
-      datasourceTemplate: "docker",
-      packageNameTemplate: "cockroachdb/cockroach",
-      versioningTemplate: "docker",
+      customType: 'regex',
+      managerFilePatterns: [
+        '/^crates\\/testkit\\/src\\/lib\\.rs$/',
+      ],
+      matchStrings: [
+        'const COCKROACH_TAG: &str = "(?<currentValue>[^"]+)";',
+      ],
+      datasourceTemplate: 'docker',
+      packageNameTemplate: 'cockroachdb/cockroach',
+      versioningTemplate: 'docker',
     },
     {
-      customType: "regex",
-      managerFilePatterns: ["/^crates\\/testkit\\/src\\/lib\\.rs$/"],
-      matchStrings: ['const YUGABYTE_TAG: &str = "(?<currentValue>[^"]+)";'],
-      datasourceTemplate: "docker",
-      packageNameTemplate: "yugabytedb/yugabyte",
-      versioningTemplate: "docker",
+      customType: 'regex',
+      managerFilePatterns: [
+        '/^crates\\/testkit\\/src\\/lib\\.rs$/',
+      ],
+      matchStrings: [
+        'const YUGABYTE_TAG: &str = "(?<currentValue>[^"]+)";',
+      ],
+      datasourceTemplate: 'docker',
+      packageNameTemplate: 'yugabytedb/yugabyte',
+      versioningTemplate: 'docker',
     },
     {
-      customType: "regex",
-      managerFilePatterns: ["/^crates\\/testkit\\/src\\/lib\\.rs$/"],
-      matchStrings: ['const FLOCI_TAG: &str = "(?<currentValue>[^"]+)";'],
-      datasourceTemplate: "docker",
-      packageNameTemplate: "floci/floci",
-      versioningTemplate: "regex:^nightly-(?<patch>\\d{2})(?<minor>\\d{2})(?<major>\\d{4})$",
+      customType: 'regex',
+      managerFilePatterns: [
+        '/^crates\\/testkit\\/src\\/lib\\.rs$/',
+      ],
+      matchStrings: [
+        'const FLOCI_TAG: &str = "(?<currentValue>[^"]+)";',
+      ],
+      datasourceTemplate: 'docker',
+      packageNameTemplate: 'floci/floci',
+      versioningTemplate: 'regex:^nightly-(?<patch>\\d{2})(?<minor>\\d{2})(?<major>\\d{4})$',
     },
   ],
-
   packageRules: [
     {
       matchUpdateTypes: [
-        "minor",
-        "patch",
-        "digest",
-        "pinDigest"
+        'minor',
+        'patch',
+        'digest',
+        'pinDigest',
       ],
-      groupName: "all minor, patch, and digest updates",
-      groupSlug: "all-minor-patch-digest-updates",
+      groupName: 'all minor, patch, and digest updates',
+      groupSlug: 'all-minor-patch-digest-updates',
     },
     {
       matchUpdateTypes: [
-        "major"
+        'major',
       ],
       prBodyNotes: [
-        "<!-- renovate-major-update -->"
+        '<!-- renovate-major-update -->',
       ],
     },
     {
       matchManagers: [
-        "github-actions"
+        'github-actions',
       ],
-      minimumReleaseAge: "7 days"
+      minimumReleaseAge: '7 days',
     },
     {
-      // digest/pinDigest updates have no releaseTimestamp, so minimumReleaseAge
-      // (with the default minimumReleaseAgeBehaviour "timestamp-required") keeps
-      // renovate/stability-days pending forever. Must stay last to override the
-      // github-actions rule above.
       matchUpdateTypes: [
-        "digest",
-        "pinDigest"
+        'digest',
+        'pinDigest',
       ],
       minimumReleaseAge: null,
-    }
-  ]
+    },
+  ],
 }
