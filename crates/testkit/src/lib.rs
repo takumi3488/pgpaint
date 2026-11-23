@@ -40,7 +40,7 @@ use tokio::{
 };
 use uuid::Uuid;
 
-const POSTGRES_TAG: &str = "18.6-trixie";
+const POSTGRES_TAG: &str = "19.0-trixie";
 const COCKROACH_TAG: &str = "v25.2.26";
 const YUGABYTE_TAG: &str = "2025.2.8.0-b60";
 // Stable Floci 2.3.0 rejects DSQL CreateCluster; use a dated nightly until it is released.
